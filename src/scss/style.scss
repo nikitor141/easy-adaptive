@@ -1,0 +1,182 @@
+@import 'fonts';
+@import 'reset';
+@import 'mixins';
+@import 'colors';
+
+//scss  ---------------------------------------------------
+%multiplier {
+	font-size: rem(32);
+	font-weight: bold;
+	color: cl('accent');
+	text-align: center;
+}
+
+//global ---------------------------------------------------
+
+img,
+svg,
+video {
+	width: 100%;
+	max-width: 100%;
+	height: auto;
+	max-height: 100%;
+}
+
+html {
+	--refRes: 1920; // разрешение, от которого рассчитывается размер элементов
+	$ratio: 0.5; // коэффициент относительно стандартной скорости расширения элементов относительно ширины экрана
+	scroll-behavior: smooth;
+	scrollbar-gutter: stable;
+	font-size: calc(100vw / var(--refRes) * 10);
+	//10 - размер шрифта, просто удобное значение
+
+	@media (min-width: 1921px) {
+		font-size: calc(
+			10px + ($ratio * 10) * ((100vw - var(--refRes) * 1px) / var(--refRes))
+		);
+	}
+
+	@include adaptive(tablet) {
+		--refRes: 768;
+	}
+	@include adaptive(mobile) {
+		--refRes: 320;
+	}
+}
+
+body {
+	font-family: 'Rubik', sans-serif;
+	font-size: rem(14);
+	color: cl('text');
+
+	&.active {
+		overflow: hidden;
+	}
+}
+
+//flex wrapper---------------------------------------------
+
+.wrapper {
+	position: relative;
+	display: flex;
+	flex-direction: column;
+	min-height: 100%;
+	overflow: hidden;
+	overflow-wrap: break-word;
+	background-color: cl('background');
+}
+// common -------------------------------------------------
+
+.container {
+	width: 100%;
+	min-width: 320px;
+	max-width: rem(1920);
+	padding: 0 rem(15);
+	margin: 0 auto;
+}
+
+//bem blocks ----------------------------------------------
+.nav {
+	&__list {
+		display: flex;
+		align-items: center;
+		justify-content: center;
+	}
+
+	&__item {
+		a {
+			display: inline-block;
+			padding: rem(5) rem(15);
+			font-size: rem(20);
+
+			&:hover {
+				color: cl('accent');
+			}
+		}
+	}
+	@include adaptive('mobile') {
+		display: none;
+	}
+}
+
+//header --------------------------------------------------
+.header {
+	padding: rem(30) rem(0);
+	&__body {
+		display: flex;
+		gap: rem(100);
+		align-items: center;
+		justify-content: space-between;
+	}
+
+	&__title {
+		font-size: rem(24);
+		font-weight: bold;
+	}
+}
+
+//flex main -----------------------------------------------
+.content {
+	flex-grow: 1;
+}
+
+.gallery {
+	padding: rem(50) rem(0);
+
+	&__standard {
+		position: absolute;
+		width: rem(100);
+		visibility: hidden;
+	}
+
+	&__multiplier {
+		@extend %multiplier;
+	}
+
+	&__list {
+		display: flex;
+		gap: rem(50);
+		max-width: fit-content;
+		padding: rem(15) rem(0);
+		margin: 0 auto;
+		overflow-x: auto;
+		@include adaptive('mobile') {
+			gap: rem(25);
+		}
+	}
+
+	&__item {
+		display: flex;
+		flex-shrink: 0;
+		align-items: center;
+		justify-content: center;
+		width: rem(200);
+		height: rem(100);
+		font-size: rem(24);
+		font-weight: bold;
+		background-color: cl('primary');
+		border-radius: rem(15);
+		&:nth-child(2n) {
+			width: rem(100);
+			background-color: cl('secondary');
+		}
+	}
+}
+.fullsize {
+	&__multiplier {
+		@extend %multiplier;
+	}
+
+	&__item {
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		width: 100vw;
+		height: rem(300);
+		font-size: rem(48);
+		font-weight: bold;
+		background-color: cl('secondary');
+	}
+}
+
+//footer --------------------------------------------------

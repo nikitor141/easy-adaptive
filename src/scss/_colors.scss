@@ -1,0 +1,32 @@
+$colors: (
+	default: (
+		'text': #090401,
+		'background': #fefaf6,
+		'primary': #59a8e8,
+		'secondary': #87eed4,
+		'accent': #df7920,
+	),
+	dark: (
+		'text': #fef9f6,
+		'background': #090501,
+		'primary': #1766a6,
+		'secondary': #11785f,
+		'accent': #df7920,
+	),
+);
+
+@mixin themeToVars($theme) {
+	$theme: map-get($colors, $theme);
+	@each $key, $value in $theme {
+		--color-#{$key}: #{$value};
+		--color-#{$key}--rgb: #{HexToRGB($value)};
+	}
+}
+
+:root {
+	@include themeToVars(default);
+
+	@media (prefers-color-scheme: 'dark') {
+		@include themeToVars(dark);
+	}
+}
