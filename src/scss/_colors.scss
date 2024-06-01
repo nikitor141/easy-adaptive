@@ -15,14 +15,6 @@ $colors: (
 	),
 );
 
-@mixin themeToVars($theme) {
-	$theme: map-get($colors, $theme);
-	@each $key, $value in $theme {
-		--color-#{$key}: #{$value};
-		--color-#{$key}--rgb: #{HexToRGB($value)};
-	}
-}
-
 :root {
 	@include themeToVars(default);
 

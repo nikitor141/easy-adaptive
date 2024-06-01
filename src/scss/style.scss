@@ -1,6 +1,6 @@
 @import 'fonts';
 @import 'reset';
-@import 'mixins';
+@import 'functions';
 @import 'colors';
 
 //scss  ---------------------------------------------------
@@ -75,49 +75,21 @@ body {
 	margin: 0 auto;
 }
 
-//bem blocks ----------------------------------------------
-.nav {
-	&__list {
-		display: flex;
-		align-items: center;
-		justify-content: center;
-	}
-
-	&__item {
-		a {
-			display: inline-block;
-			padding: rem(5) rem(15);
-			font-size: rem(20);
-
-			&:hover {
-				color: cl('accent');
-			}
-		}
-	}
-	@include adaptive('mobile') {
-		display: none;
-	}
-}
-
-//header --------------------------------------------------
-.header {
-	padding: rem(30) rem(0);
-	&__body {
-		display: flex;
-		gap: rem(100);
-		align-items: center;
-		justify-content: space-between;
-	}
-
-	&__title {
-		font-size: rem(24);
-		font-weight: bold;
-	}
-}
-
 //flex main -----------------------------------------------
 .content {
 	flex-grow: 1;
+}
+
+.title {
+	padding: rem(25) 0;
+	font-size: rem(54);
+	font-weight: bold;
+	text-align: center;
+
+	@include adaptive('mobile') {
+		padding: rem(10) 0;
+		font-size: rem(25);
+	}
 }
 
 .gallery {
@@ -178,5 +150,3 @@ body {
 		background-color: cl('secondary');
 	}
 }
-
-//footer --------------------------------------------------

@@ -12,6 +12,14 @@
 	}
 }
 
+@mixin themeToVars($theme) {
+	$theme: map-get($colors, $theme);
+	@each $key, $value in $theme {
+		--color-#{$key}: #{$value};
+		--color-#{$key}--rgb: #{HexToRGB($value)};
+	}
+}
+
 @function rem($pixels) {
 	@return calc($pixels / 10) + rem;
 }
